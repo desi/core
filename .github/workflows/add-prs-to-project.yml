@@ -14,6 +14,14 @@ jobs:
       TEAM_LABEL: 'team-wallet-framework'
 
     steps:
+      - name: Check token
+        run: |
+          if [ -n "${{ secrets.CORE_ADD_PRS_TO_PROJECT_TEST }}" ]; then
+            echo "Token is set"
+          else
+            echo "Token is not set"
+          fi
+          
       - name: Add PR to project board
         uses: actions/add-to-project@v1.0.1
         if: |
