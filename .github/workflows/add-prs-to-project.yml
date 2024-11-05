@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Add PR to project board
-        uses: actions/add-to-project@244f685bbc3b7adfa8466e08b698b5577571133e
+        uses: actions/add-to-project@v1.0.1
         if: |
           github.event.requested_team.name == env.TEAM_NAME || 
           contains(github.event.pull_request.labels.*.name, env.TEAM_LABEL)
