@@ -19,13 +19,29 @@ jobs:
       TEAM_LABEL: 'team-wallet-framework'
 
     steps:
-      - name: Check token
+      # Test default token access
+      - name: Check GITHUB_TOKEN
+        run: |
+          if [ -n "${{ secrets.GITHUB_TOKEN }}" ]; then
+            echo "Default GITHUB_TOKEN is set"
+          else
+            echo "Default GITHUB_TOKEN is not set"
+          fi
+
+      # Test custom token access
+      - name: Check custom token
         run: |
           if [ -n "${{ secrets.CORE_ADD_PRS_TO_PROJECT_TEST }}" ]; then
-            echo "Token is set"
+            echo "CORE_ADD_PRS_TO_PROJECT_TEST is set"
           else
-            echo "Token is not set"
+            echo "CORE_ADD_PRS_TO_PROJECT_TEST is not set"
           fi
+          
+      # List available secret names (will not show values)
+      - name: Debug available secrets
+        run: |
+          echo "Available secret names:"
+          echo "${{ toJSON(secrets) }}" | jq 'keys'
           
       - name: Add PR to project board
         uses: actions/add-to-project@v1.0.1
