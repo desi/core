@@ -5,6 +5,12 @@ on:
   pull_request:
     types: [opened, labeled, review_requested]
 
+# Add these permissions
+permissions:
+  repository-projects: write
+  projects: write
+  pull-requests: write
+
 jobs:
   add-to-project:
     name: Add PR to Project Board
